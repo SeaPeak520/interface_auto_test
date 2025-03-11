@@ -1,0 +1,20 @@
+1、下载jdk 和 allure
+jdk链接：https://www.oracle.com/java/technologies/downloads/  下载jdk-17.0.14_linux-x64_bin.tar.gz
+allure链接：https://github.com/allure-framework/allure2/releases  下载allure-2.24.0.tgz
+jenkins插件：https://mirrors.tuna.tsinghua.edu.cn/jenkins/plugins/allure-jenkins-plugin/2.30.0/  下载2.30.0
+
+2、把jenkins目录放在linux系统里，root用户
+包含jdk 和 allure的压缩文件、build.sh、create_user.sh、Dockerfile、run.sh、start.sh
+
+3、检查是否有jenkins用户
+没有则执行create_user.sh脚本
+
+4、执行start.sh创建镜像和容器（确保没有镜像：jenkins:2.426.3-jdk17 ，容器：jenkins ，否则会清除之前的镜像和容器）
+
+5、打开jenkins页面
+
+6、sh get_jenkins_pwd.sh 查看管理员密码
+
+ps:
+问题1、expect: 未找到命令
+解决：sudo yum install expect

@@ -1,0 +1,21 @@
+get_token:
+  host: ${{lawyer_host}}
+  url: /sso/login2
+  method: post
+  remark: 获取token
+  is_run: true
+  headers:
+    Content-Type: application/form-data
+  requestType: json
+  requestData:
+    telephone: xxx
+    authCode: yjlnb1024
+  dependence_case:
+  dependence_case_data:
+  setup_sql:
+  database_assert_sql:
+  database_assert_result:
+  assert_data:
+  current_request_set_cache:
+  teardown_sql:
+  teardown:

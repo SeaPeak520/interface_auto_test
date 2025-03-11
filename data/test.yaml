@@ -1,0 +1,196 @@
+# 公共参数, 在生成py用例填充数据时使用
+case_common:
+  allureEpic: 测试平台
+  allureFeature: 抽奖活动
+  allureStory: 查询用户当前剩余抽奖次数接口
+
+
+# dict
+#is_params:
+#  a: delete from table where order_id=
+
+#  - 代表list
+#is_params:
+#  - a: delete from table where order_id=
+
+caseCollectConcel:
+  #不同服务可能用host1和host2做标识，和config.yaml是映射关系
+  host: ${{host}}
+  url: /mall-lawyer/concel
+  #请求方式 [post]
+  method: post
+  remark: 取消收藏案源信息接口
+  # 是否执行，空或者 true 都会执行
+  is_run:
+  #请求头
+  headers:
+    Content-Type: application/form-data
+    #请求带上token，从token.json获取
+    authorization: $cache{token}
+    # 这里cookie的值，写的是存入缓存的名称
+    #cookie: $cache{login_cookie}
+  # 请求的数据，是 params 还是 json、data
+  requestType: params
+  #请求参数
+  requestData:
+    caseId: $cache{caseCollectConcel_setup_case_id}   #使用依赖接口的缓存
+  # 依赖用例数据
+
+  # 1、如果没有依赖
+#  dependence_case:
+#  dependence_case_data:
+
+  # 2、存在依赖
+  dependence_case: true
+  dependence_case_data:
+    # 1、依赖于其他接口的数据，相当于执行该接口用例
+    - case_id: ArticleList02
+      # 这里是替换依赖接口的请求参数，允许替换多个（- $.requestData.cid|50 按列表类型添加）
+      # $.requestData.cid 正则匹配该用例的数据， | 后面是要替换的新数据（支持从缓存获取，|$cache{cid},确保缓存存在）
+      replace_key:
+        - $.requestData.cid|50
+      dependent_data:
+        # request是从前置用例(ArticleList02)的请求参数设置缓存
+        - dependent_type: request
+          jsonpath: $.cid
+          set_cache: cid_01
+        # # request是从前置用例(ArticleList02)的响应结果设置缓存
+        - dependent_type: response
+          jsonpath: $.data.datas[1].title
+          set_cache: title_02
+    # self表示执行前置sql(setup_sql)
+    - case_id: self
+      dependent_data:
+        # sqlData代表从sql的数据里匹配进行缓存
+        - dependent_type: sqlData
+          # 0 代表对应setup_sql的第几条
+          # 9 代表 sql语句执行结果的第几行数据
+          # $.uuid 正则匹配sql结果的哪个数据
+          # 表示从setup_sql的第1个sql的执行结果，然后再找到第10个结果，最后正则匹配$.uuid的数据，设置缓存为uuid_01
+          jsonpath: 0|9|$.uuid
+          set_cache: uuid_01
+        - dependent_type: sqlData
+          # 表示从setup_sql的第2个sql的执行结果，然后再找到第2个结果，最后正则匹配$.uuid的数据，设置缓存为uuid_02
+          jsonpath: 1|1|$.uuid
+          set_cache: uuid_02
+  #前置sql
+  # 2、如果只有sql执行：dependence_case为true，dependence_case_data为空，setup_sql填入需要执行的用例就行
+  setup_sql:
+    - select * from user limit 10
+    - select * from user limit 3
+  # 从当前用例的响应结果或请求参数进行缓存
+  current_request_set_cache:
+    # type为response，从当前用例的响应结果进行缓存
+    - type: response
+      jsonpath: $.data.datas[2].title
+      set_cache: title_03
+    # type为request，从当前用例的响应结果进行缓存
+#    - type: request
+#      jsonpath: $.data.datas[2].title
+#      set_cache: title_03
+  #结果断言
+  assert_data:
+    # 断言状态码的固定写法
+    status_code: 200
+    # 断言其他信息的写法
+    # key(code或message)可以随便取名，但最好取个相关内容的
+    code:
+      # AssertType为None或Response，代表从当前用例的响应结果进行匹配
+      # type为==，代表jsonpath匹配的值和value进行比较，是否相等（详细对应参考models.py的AssertType和assertion/assert_tyoe.py的内容）
+      # message：断言失败后的提示信息
+      jsonpath: $.code
+      type: ==
+      value: 200
+      AssertType:
+      message: code不一致
+    message:
+      # AssertType为Request，代表从当前用例的请求参数进行匹配
+      jsonpath: $.message
+      type: ==
+      value: 操作成功
+      AssertType: Request
+      message: message不一致
+    message1:
+      # AssertType为SQL，代表从当前用例的请求参数进行匹配
+      # 0 代表对应assert_sql的第几条
+      # 0 代表 sql语句执行结果的第几行数据
+      # $.message 正则匹配sql结果的哪个数据
+      # 表示从assert_sql的第1个sql的执行结果，然后再找到第1个结果，最后正则匹配$.message的数据，然后和value进行断言
+      jsonpath: 0|0|$.message
+      type: ==
+      value: 操作成功
+      AssertType: SQL
+      message: message不一致
+  assert_sql:
+  #后置
+  teardown:
+    # 1、比如调用更新接口时，接口没有返回调用删除接口时必需的数据，所以执行后置时 先执行查询接口获取数据进行缓存
+    # 然后调用删除接口时替换请求参数的内容，再进行接口请求
+    # 先查询
+    - case_id: get_ArticleList02
+      param_prepare:
+        # 这里是替换依赖接口的请求参数，允许替换多个（- $.requestData.cid|50 按列表类型添加）
+        # $.requestData.cid 正则匹配该用例的数据， | 后面是要替换的新数据（支持从缓存获取，|$td{cid},确保缓存存在）
+        replace_key:
+          - $.requestData.cid|61
+        params:
+          # self_response 代表依赖用例(get_ArticleList02)请求的响应信息
+          - dependent_type: self_response
+            # 从response中获取信息
+            jsonpath: $.data.curPage
+            # 把获取到信息存进缓存
+            set_cache: td_curPage
+          - dependent_type: self_response
+            # 从response中获取信息
+            jsonpath: $.data.datas[3].chapterId
+            # 把获取到信息存进缓存
+            set_cache: td_chapterId
+
+    #  后删除
+    - case_id: delete_ArticleList02
+      send_request:
+        # dependent_type为cache，代表从缓存取数据，再使用replace_key来匹配并用缓存值替换
+        - dependent_type: cache
+          # int: 代表把chapterId获取的缓存值，改变其类型为int，任意改变，符合数据结构就行
+          data: int:chapterId
+          # delete_ArticleList02请求信息通过$.data.id匹配替换缓存id：chapterId的缓存内容
+          replace_key: $.requestData.cid
+
+    # 2、比如调用更新接口用例返回后置条件所需要的数据，则直接进行缓存替换，再进行接口请求
+    # 使用current_request_set_cache设置缓存
+    - case_id: delete_ArticleList02
+      send_request:
+        # dependent_type为cache，代表从缓存取数据，再使用replace_key来匹配并用缓存值替换
+        - dependent_type: cache
+          data: int:cid
+          # delete_ArticleList02请求信息通过$.requestData.cid匹配替换缓存id：cid的缓存内容
+          replace_key: $.requestData.cid
+
+    # 3、手动输入替换依赖用例的请求参数
+    - case_id: delete_ArticleList02
+      send_request:
+        # dependent_type为input，代表直接把data的数据替换
+        - dependent_type: input
+          data: 61
+          # delete_ArticleList02请求信息通过$.requestData.cid匹配替换61
+          replace_key: $.requestData.cid
+
+    # 4、 从sql的数据里匹配进行缓存
+    - case_id: delete_ArticleList02
+      send_request:
+        # dependent_type为sqlData，代表从sql的数据里匹配进行缓存
+        - dependent_type: sqlData
+          # 0 代表对应setup_sql的第几条
+          # 9 代表 sql语句执行结果的第几行数据
+          # $.uuid 正则匹配sql结果的哪个数据
+          # 表示从teardown_sql的第1个sql的执行结果，然后再找到第10个结果，最后正则匹配$.alert_level的数据，替换成delete_ArticleList02用例的请求参数
+          data: 0|0|$.alert_level
+          # delete_ArticleList02请求信息通过$.requestData.cid匹配替换 sql匹配的数据
+          replace_key: $.requestData.cid
+  # 如果只用sql进行后置处理，teardown不用填写，执行填写teardown_sql就行了
+  teardown_sql:
+    - select * from alert_alerts where alert_level='$td{cid}'
+
+
+
+
