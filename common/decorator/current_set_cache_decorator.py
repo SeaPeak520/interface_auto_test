@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from functools import wraps
+
 from common.requests.set_current_request_cache import SetCurrentRequestCache
 
 

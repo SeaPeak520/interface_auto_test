@@ -4,9 +4,9 @@ import requests
 
 from common.allure.allure_report_data import AllureFileClean
 from common.exceptions.exceptions import SendMessageError, ValueTypeError
-from utils.context import Context
-from utils import config
 from models.allure_model import TestMetrics
+from utils import config
+from utils.context import Context
 
 
 class WeChatSend:

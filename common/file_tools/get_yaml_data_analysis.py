@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from typing import Text, List
 from pathlib import Path
+from typing import Text, List
 
 from common.cache.local_cache_control import CacheHandler
+from common.exceptions.exceptions import FileNotFound
 from models.request_model import Method, RequestType, TestCase, TestCaseEnum
 from utils.yaml_control import GetYamlCaseData
-from common.exceptions.exceptions import FileNotFound
 
 
 class CaseDataCheck:

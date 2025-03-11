@@ -3,10 +3,9 @@ from typing import Text, Dict, List, Any
 
 from common.cache.local_cache_control import CacheHandler
 from common.db.mysql_control import SqlHandler
-from utils.regular_control import regular_handler, teardown_regular
-
 from models.request_model import ResponseData, ParamPrepare, SendRequest, DependentType
-from utils.json_control import jsonpath_get_value,jsonpath_replace
+from utils.json_control import jsonpath_get_value, jsonpath_replace
+from utils.regular_control import regular_handler, teardown_regular
 
 
 class TearDownControl:

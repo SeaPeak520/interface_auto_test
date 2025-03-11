@@ -1,6 +1,7 @@
-import redis
 import allure
+import redis
 from loguru import logger
+
 from utils import config
 
 

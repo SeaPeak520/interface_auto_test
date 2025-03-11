@@ -2,11 +2,11 @@ from typing import List, Union, Dict
 
 import pymysql
 from dbutils.pooled_db import PooledDB
-
 from loguru import logger
+
 from common.exceptions.exceptions import DataAcquisitionFailed, MysqlConnectionError
-from utils import config
 from models.db_model import SetupTeardownType
+from utils import config
 
 
 class MysqlDB:
@@ -124,7 +124,6 @@ class SqlHandler(MysqlDB):
 
 if __name__ == "__main__":
     # 用法
-    from jsonpath import jsonpath
 
     ss_sql = ["select * from user limit 10",'select count(*) as count from user']
     # sqkl = ["select * from "]

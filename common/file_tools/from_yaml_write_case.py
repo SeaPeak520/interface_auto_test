@@ -1,9 +1,10 @@
-from loguru import logger
 from pathlib import Path
 
+from loguru import logger
+
+from common.exceptions.exceptions import FileNotFound
 from config import TESTDATA_DIR, TESTCASE_DIR
 from utils.yaml_control import GetYamlCaseData
-from common.exceptions.exceptions import FileNotFound
 
 
 # 读取yaml文件写入用例

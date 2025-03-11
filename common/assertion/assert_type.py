@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from typing import Any,  Union, Text
+from typing import Any, Union, Text
+
 from pytest_assume.plugin import assume
 
 """

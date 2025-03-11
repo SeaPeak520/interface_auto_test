@@ -13,8 +13,8 @@ from typing import Any, Text
 from dingtalkchatbot.chatbot import DingtalkChatbot, FeedLink
 
 from common.allure.allure_report_data import AllureFileClean
-from utils import config
 from models.allure_model import TestMetrics
+from utils import config
 
 
 class DingTalkSendMsg:

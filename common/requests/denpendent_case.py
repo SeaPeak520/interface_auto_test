@@ -2,10 +2,10 @@ import ast
 import json
 from typing import List, Dict, Text
 
-from common.exceptions.exceptions import ValueNotFoundError, ValueTypeError
 from common.cache.local_cache_control import CacheHandler
-from utils.json_control import jsonpath_get_value, jsonpath_replace
+from common.exceptions.exceptions import ValueNotFoundError, ValueTypeError
 from models.request_model import TestCase, ResponseData, DependentData, DependentType
+from utils.json_control import jsonpath_get_value, jsonpath_replace
 from utils.regular_control import config_regular, cache_regular
 
 

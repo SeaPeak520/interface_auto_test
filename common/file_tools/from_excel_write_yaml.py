@@ -1,12 +1,12 @@
 import ast
+from pathlib import Path
 
 import pandas as pd
 
+from config import TESTDATA_DIR
+from models.request_model import ContentType
 from utils.excel_control import ExcelControl
 from utils.yaml_control import YamlHandler
-from config import TESTDATA_DIR
-from pathlib import Path
-from models.request_model import ContentType
 
 
 class FromExcelWriteYaml(ExcelControl):

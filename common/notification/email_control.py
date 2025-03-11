@@ -1,16 +1,16 @@
-import os
 import smtplib
 from email.header import Header
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.utils import parseaddr, formataddr
 from typing import Dict
+
 from loguru import logger
 
 from common.allure.allure_report_data import AllureFileClean
-from utils import config
-from models.config_model import Email
 from models.allure_model import TestMetrics
+from models.config_model import Email
+from utils import config
 
 
 class EmailHelper:

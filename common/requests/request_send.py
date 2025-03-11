@@ -4,11 +4,11 @@ import requests
 import urllib3
 
 from common.db.mysql_control import MysqlDB
-from common.decorator.runtime_decorator import execution_duration
-from common.decorator.current_set_cache_decorator import current_set_cache
 from common.decorator.allure_decorator import allure_decorator
 from common.decorator.assert_decorator import assert_decorator
+from common.decorator.current_set_cache_decorator import current_set_cache
 from common.decorator.request_decorator import request_information
+from common.decorator.runtime_decorator import execution_duration
 from common.decorator.teardown_decorator import teardown_decorator
 from common.requests.denpendent_case import DependentCase
 from models.request_model import TestCase, RequestType, ResponseData

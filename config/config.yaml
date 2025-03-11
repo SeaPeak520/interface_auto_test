@@ -1,0 +1,73 @@
+project_name: xxx项目名称
+
+env: 测试环境
+# 测试人员名称，作用于自动生成代码的作者，以及发送企业微信、钉钉通知的测试负责人
+tester_name:
+
+# 域名1
+host:
+  gateway_host: https://x.com
+  lawyer_host: https://x.com
+  callback_host: https://x.com
+  lianxi_host: https://www.wanandroid.com
+
+
+
+
+# 数据库相关配置
+mysql:
+  # 数据库开关
+  switch: true
+  host: 192.168.220.133
+  user: root
+  pwd: root
+  port: 3306
+  db: test
+
+redis:
+  host : 192.168.220.133
+  port : 6379
+  pwd : '123456'
+  db : 0
+
+# 镜像源
+#mirror_source: http://mirrors.aliyun.com/pypi/simple/
+
+# 报告通知类型：0: 不发送通知 1：钉钉 2：企业微信通知 3、邮箱通知 4、飞书通知
+# 支持同时发送多个通知，如多个，则用逗号分割， 如 1, 2
+notification_type: 0
+
+# 钉钉相关配置
+ding_talk:
+  webhook: https://oapi.dingtalk.com/robot/send?access_token=a59902xxxxxxx8aa2a864e7d61ee9fc076481ced2a6
+  secret: SECdea6489dfcc3b9259da943c5ae38d3530696f2fa83xxxxxxxxxxx5b9b
+
+# 企业通知的相关配置
+wechat:
+  webhook: https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=22748687-fa3b-4e48-a5d7-0502cef422b4
+
+### 邮箱必填，需要全部都配置好，程序运行失败时，会发送邮件通知!!!!
+### 邮箱必填，需要全部都配置好，程序运行失败时，会发送邮件通知!!!!
+### 邮箱必填，需要全部都配置好，程序运行失败时，会发送邮件通知!!!!
+### 重要的事情说三遍
+email:
+  host: 192.168.188.53
+  port: 465
+  user: user01@james.com
+  pwd: user01
+  sender: 测试<3210192293@qq.com>
+  receivers: [ 'user02@james.com' ]
+  receivers_list: [ 'user02@james.com','user03@james.com' ]
+  to: 自动化测试
+
+# 飞书通知
+#lark:
+#  webhook:
+
+# 自动读取yaml生成用例，过滤列表
+target : ['pre', 'test.yaml','testdata.xlsx','~$testdata.xlsx']
+
+
+
+
+

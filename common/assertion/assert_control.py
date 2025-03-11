@@ -1,13 +1,13 @@
-import allure
-
 from typing import Any, Text, Dict
+
+import allure
 
 from common.assertion import assert_type as assert_type
 from common.exceptions.exceptions import AssertTypeError
-from utils.json_control import jsonpath_get_value
 from models import load_module_functions
 from models.assert_model import AssertType, AssertRange
 from models.request_model import ResponseData
+from utils.json_control import jsonpath_get_value
 
 
 class AssertUtil:

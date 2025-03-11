@@ -3,6 +3,7 @@
 import json
 
 import allure
+
 from models.allure_model import AllureAttachmentType
 
 
