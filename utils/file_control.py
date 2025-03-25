@@ -25,8 +25,3 @@ def def_path(path: Path):
             print(f"路径不存在：{path}")
     except Exception as e:
         print(f"删除路径报错{path}: {e}")
-
-
-if __name__ == '__main__':
-
-# def_path(ALLURE_DIR)
