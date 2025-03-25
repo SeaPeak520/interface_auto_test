@@ -1,5 +1,7 @@
 import shutil
 from pathlib import Path
+
+
 def def_path(path: Path):
     """
     删除给定的路径，可以是文件、空目录或非空目录。
@@ -27,4 +29,4 @@ def def_path(path: Path):
 
 if __name__ == '__main__':
 
-    #def_path(ALLURE_DIR)
+# def_path(ALLURE_DIR)
