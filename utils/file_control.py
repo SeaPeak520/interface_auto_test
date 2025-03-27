@@ -2,7 +2,7 @@ import shutil
 from pathlib import Path
 
 
-def def_path(path: Path):
+def del_path(path: Path):
     """
     删除给定的路径，可以是文件、空目录或非空目录。
     :param path: 要删除的路径（字符串或 Path 对象）

@@ -10,13 +10,13 @@ from loguru import logger
 
 from models.request_model import TestCase
 from common.allure.allure_tools import allure_step
-from utils.file_control import def_path
+from utils.file_control import del_path
 
 @pytest.fixture(scope="session", autouse=False)
 def clear_report():
     """如clean命名无法删除报告，这里手动删除"""
     from config import ALLURE_DIR
-    def_path(ALLURE_DIR)
+    del_path(ALLURE_DIR)
 
 
 # @pytest.fixture(scope='session', autouse=True)

@@ -8,7 +8,7 @@ tester_name:
 host:
   gateway_host: https://x.com
   lawyer_host: https://x.com
-  callback_host: https://x.com
+  callback_host: https://www.baidu.com
   lianxi_host: https://www.wanandroid.com
 
 
@@ -65,7 +65,7 @@ email:
 #  webhook:
 
 # 自动读取yaml生成用例，过滤列表
-target : ['pre', 'test.yaml','testdata.xlsx','~$testdata.xlsx']
+target : ['pre', 'test.yaml','testdata.xlsx','~$testdata.xlsx','proxy_data.yaml']
 
 
 

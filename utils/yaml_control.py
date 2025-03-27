@@ -19,8 +19,6 @@ class YamlHandler:
 
     def write_yaml_by_dict(self, dict_data):
 
-        print(self._file.parent)
-        print(dict_data)
         # 判断目录不存在，则创建目录
         if not Path.is_dir(self._file.parent):
             self._file.parent.mkdir(parents=True,exist_ok=True)
